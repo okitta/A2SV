@@ -1,0 +1,5 @@
+total_english = int(input())
+list_of_english_students = set(map(int,input().split(' ')))
+total_french = int(input())
+list_of_french_students = set(map(int,input().split()))
+print(len(list_of_english_students.difference(list_of_french_students)))
