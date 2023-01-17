@@ -1,11 +1,11 @@
 class Solution:
     def sortPeople(self, names: List[str], heights: List[int]) -> List[str]:
         for left in range(len(names)-1):
-            max_number = left+1
-            while heights[max_number] > heights[left] and max_number > 0:
-                names[max_number],names[left] = names[left],names[max_number]
-                heights[max_number],heights[left] = heights[left],heights[max_number]
+            next_pointer = left+1
+            while heights[next_pointer] > heights[left] and next_pointer > 0:
+                names[next_pointer],names[left] = names[left],names[next_pointer]
+                heights[next_pointer],heights[left] = heights[left],heights[next_pointer]
                 left -= 1
-                max_number -= 1
+                next_pointer -= 1
         return names
         
