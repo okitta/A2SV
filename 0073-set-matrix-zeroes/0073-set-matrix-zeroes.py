@@ -14,7 +14,6 @@ class Solution:
             for col in range(len(matrix[0])):
                 if row in set_row or col in set_col:
                     matrix[row][col] = 0
-        print(matrix)
             
             
                 
