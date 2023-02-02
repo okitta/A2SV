@@ -17,6 +17,7 @@ class Solution:
             current = head
             last = head
             if length < k:
+                link.append([last])
                 break
             while group > 0 and length >= k:
                 group -= 1
@@ -25,17 +26,16 @@ class Solution:
                 previous = current
                 current = after
             length -= k
-            link.append(previous)
+            link.append([previous,last])
             head = current
-        for index in range(len(link)):
-            start = link[index]
-            while start.next:
-                start = start.next
-            if index == len(link)-1:
-                start.next = head
-            else:
-                start.next = link[index + 1]
+        for index in range(len(link)-1):
+            start = link[index][1]
+            nxhead = link[index+1][0]
+            start.next = nxhead
+            # while start.next:
+            #     start = start.next
+            # start.next = link[index + 1]
                 
-        return link[0]
+        return link[0][0]
             
             
