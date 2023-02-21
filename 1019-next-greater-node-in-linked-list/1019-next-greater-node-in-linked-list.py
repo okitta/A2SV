@@ -9,7 +9,7 @@ class Solution:
         ans = []
         
         counter = 0
-        while head is not None:
+        while head:
             while stack and stack[-1][0] < head.val:
                 ans[stack[-1][1]] = head.val
                 stack.pop()
