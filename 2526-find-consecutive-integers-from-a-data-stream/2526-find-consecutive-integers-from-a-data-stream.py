@@ -11,9 +11,7 @@ class DataStream:
         self.queue.append(num)
         if self.value == num:
             self.counter += 1
-        if len(self.queue) > self.k:
-            
-            if self.queue.popleft() == self.value:
+        if len(self.queue) > self.k and self.queue.popleft() == self.value:
                 self.counter -= 1
         return self.counter == self.k
             
