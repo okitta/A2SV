@@ -9,6 +9,4 @@ class Solution:
                 pointer2 += 1
             else:
                 pointer2 += 1
-        if counter == len(s):
-            return True
-        return False
+        return counter == len(s)
