@@ -1,29 +1,24 @@
+import heapq
 class Solution:
     def checkIfPrerequisite(self, numCourses: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
-        neighbors = {node: set() for node in range(numCourses)}
-        indegree = defaultdict(int)     
-        pre_lookup = defaultdict(set)   
+        ans = [False]*len(queries)
+        exist = [[float("inf")]*numCourses for i in range(numCourses)]
+        graph = defaultdict(list)
+        for source,dest in prerequisites:
+            exist[source][dest] = 1
         
-        for pre, post in prerequisites:
-            neighbors[pre].add(post)
-            indegree[post] += 1
-
-        queue = deque([])
-        for n in neighbors:
-            if indegree[n] == 0:
-                queue.append(n)
+        for i in range(numCourses):
+            exist[i][i] = 0
         
-
-        while queue:
-            cur = queue.popleft()
-            for neighbor in neighbors[cur]:
-                pre_lookup[neighbor].add(cur)
-                pre_lookup[neighbor].update(pre_lookup[cur])
-                
-                indegree[neighbor] -= 1
-                if indegree[neighbor] == 0:
-                    queue.append(neighbor)
-
-        result = [True if q[0] in pre_lookup[q[1]] else False for q in queries]
         
-        return result
+        for k in range(numCourses):
+            for j in range(numCourses):
+                for i in range(numCourses):
+                     exist[i][j] = min(exist[i][j], exist[i][k] + exist[k][j])
+        for idx,query in enumerate(queries):
+            if exist[query[0]][query[1]] != float("inf"):
+                ans[idx] = True
+            else:
+                ans[idx] = False
+
+        return ans
